@@ -24,6 +24,7 @@ public class StallController{
     }
     @GetMapping(value = "/all")
     public List<Stall> fetchStallList() {
+
         return stallService.fetchStallList();
     }
 

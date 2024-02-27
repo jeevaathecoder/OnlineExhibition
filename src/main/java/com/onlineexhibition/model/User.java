@@ -31,10 +31,4 @@ public class User {
     private String status;
     @Column(name="user_type")
     private Long user_type_id;
-
-
-
-
-
-
 }

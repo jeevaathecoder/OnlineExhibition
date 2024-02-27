@@ -7,6 +7,8 @@ import com.onlineexhibition.request.UserRequest;
 
 import jakarta.validation.Valid;
 
+import java.util.List;
+
 public interface IUserService {
 
 
@@ -17,5 +19,7 @@ public interface IUserService {
 
     User findByUserId(Long id);
 
+
 }
+
 
