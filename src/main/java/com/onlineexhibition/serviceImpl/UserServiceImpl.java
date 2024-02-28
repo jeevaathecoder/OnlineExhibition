@@ -8,6 +8,7 @@ import com.onlineexhibition.services.IUserService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,7 +39,7 @@ private UserRoleRepository userRoleRepository;
             user.setLastname(request.getLastname());
             user.setMobile(request.getMobile());
             user.setUser_type_id(request.getUser_type_id());
-            user.setPassword(request.getPassword());
+            user.setPassword(new BCryptPasswordEncoder().encode(request.getPassword()));
             user.setStatus(onlineExhibitionConstant.UNAUTHORIZED_USER);
             User create_user = userRepository.save(user);
             return create_user;
@@ -79,6 +80,12 @@ private UserRoleRepository userRoleRepository;
     @Override
     public User findByUserId(Long id) {
         return userRepository.findById(id).get();
+    }
+
+    @Override
+    public String findByUserEmail(String email) {
+        User user = userRepository.findByEmail(email).get();
+        return user.getPassword();
     }
 
 

@@ -20,6 +20,7 @@ public interface IUserService {
     User findByUserId(Long id);
 
 
+    String findByUserEmail(String email);
 }
 
 

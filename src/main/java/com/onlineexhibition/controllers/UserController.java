@@ -9,6 +9,7 @@ import com.onlineexhibition.services.IUserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -29,8 +30,19 @@ public class UserController {
 
     @PostMapping("/login")
     public String register(@Valid @RequestBody LoginRequest loginRequest){
+//Get the password entered by the user
+        String password = loginRequest.getPassword();
+        //Encrypt
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encode = passwordEncoder.encode(password);
+        //Query the user's password
+        String userpwd = userService.findByUserEmail(loginRequest.getEmail());
+        //Pare the password
+        if(userpwd.equals(password)){
+            return "login success";
+        }
 
-        return "We need to implement login functionality here.";
+        return "error";
     }
 
 
