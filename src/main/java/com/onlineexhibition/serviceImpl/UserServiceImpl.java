@@ -70,7 +70,7 @@ private UserRoleRepository userRoleRepository;
             else {
                 validUser.setStatus(onlineExhibitionConstant.AUTHORIZED_USER);
                 userRepository.save(validUser);
-                return onlineExhibitionConstant.USER_AUTHORIZED;
+                return onlineExhibitionConstant. AUTHORIZED_USER;
             }
 
         }
