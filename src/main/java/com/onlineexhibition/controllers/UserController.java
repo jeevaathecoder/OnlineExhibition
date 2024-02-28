@@ -48,7 +48,7 @@ public class UserController {
     public ResponseEntity<?> authorize(@Valid @RequestBody UserRequest request){
         String response = userService.authorize(request);
         if(response.equals(onlineExhibitionConstant.AUTHORIZED_USER)) {
-            return ResponseEntity.ok(response);
+            return ResponseEntity.ok(200);
         }
         return ResponseEntity.badRequest().body(response);
     }
