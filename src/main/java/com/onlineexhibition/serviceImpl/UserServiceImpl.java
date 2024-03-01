@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,7 +23,9 @@ public class UserServiceImpl implements IUserService {
 
     @Autowired
 private UserRoleRepository userRoleRepository;
-private OnlineExhibitionConstant onlineExhibitionConstant;
+
+
+    public  OnlineExhibitionConstant onlineExhibitionConstant;
 
 
     @Override
@@ -66,7 +69,7 @@ private OnlineExhibitionConstant onlineExhibitionConstant;
             else {
                 validUser.setStatus(onlineExhibitionConstant.AUTHORIZED_USER);
                 userRepository.save(validUser);
-                return onlineExhibitionConstant.USER_AUTHORIZED;
+                return onlineExhibitionConstant. AUTHORIZED_USER;
             }
 
         }
@@ -78,4 +81,15 @@ private OnlineExhibitionConstant onlineExhibitionConstant;
         return userRepository.findById(id).get();
     }
 
+
+    public List<User> getBendingExhibitors() {
+        return userRepository.getBendingExhibitors(OnlineExhibitionConstant.UNAUTHORIZED_USER,2l);
+    }
+
+    public List<User> getApprovedExhibitors() {
+        return userRepository.getApprovedExhibitors(OnlineExhibitionConstant.AUTHORIZED_USER,2l);
+    }
 }
+
+
+
