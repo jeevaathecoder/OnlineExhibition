@@ -7,7 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class OnlineExhibitionApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(OnlineExhibitionApplication.class, args);
+
+
     }
 
 }

@@ -17,4 +17,7 @@ public class StallResponse {
 
     private Stall stall;
 
+    public StallResponse(String stallUpdatedSuccessfully, boolean b) {
+
+    }
 }

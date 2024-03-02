@@ -15,7 +15,7 @@ public interface StallService{
 
     void deleteStallById(Long stallId);
 
-    Stall updateStall(Long stallId, Stall stall);
+    StallResponse updateStall(Long stallId, Stall stall);
 
 
 }
