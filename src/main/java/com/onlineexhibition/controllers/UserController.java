@@ -4,20 +4,21 @@ import com.onlineexhibition.request.LoginRequest;
 import com.onlineexhibition.request.SignupRequest;
 import com.onlineexhibition.model.User;
 import com.onlineexhibition.request.UserRequest;
+import com.onlineexhibition.response.AuthenticationResponse;
 import com.onlineexhibition.serviceImpl.UserServiceImpl;
-import com.onlineexhibition.services.IUserService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+
 @RestController
 @RequestMapping("/user")
+@RequiredArgsConstructor
+@Validated
 public class UserController {
-
-
-
 
     private OnlineExhibitionConstant onlineExhibitionConstant;
 
@@ -25,12 +26,9 @@ public class UserController {
     private UserServiceImpl userService;
 
 
-
-
     @PostMapping("/login")
-    public String register(@Valid @RequestBody LoginRequest loginRequest){
-
-        return "We need to implement login functionality here.";
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody  @Valid LoginRequest loginRequest){
+        return userService.login(loginRequest);
     }
 
 

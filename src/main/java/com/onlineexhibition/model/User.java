@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import java.util.*;
 
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Data
 @Builder
@@ -11,7 +14,7 @@ import lombok.*;
 @Table(name = "user")
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue
@@ -31,4 +34,35 @@ public class User {
     private String status;
     @Column(name="user_type")
     private Long user_type_id;
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ADMIN"));//TO-DO add the role here
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
