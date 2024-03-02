@@ -53,7 +53,7 @@ public class UserServiceImpl implements IUserService {
             user.setLastname(request.getLastname());
             user.setMobile(request.getMobile());
             user.setUser_type_id(request.getUser_type_id());
-            user.setPassword(request.getPassword());
+            user.setPassword(passwordEncoder.encode(request.getPassword()));
             user.setStatus(onlineExhibitionConstant.UNAUTHORIZED_USER);
             User create_user = userRepository.save(user);
             return create_user;
