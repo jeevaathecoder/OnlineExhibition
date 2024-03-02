@@ -1,7 +1,9 @@
-INSERT INTO user (firstname, lastname, email, mobile, password, user_type_id)
-VALUES ('admin','admin','admin@gmail.com,''1234567890','passoword',1);
+-- Create One user As Admin
+INSERT INTO user (id,first_name, last_name, user_email, contact, user_password, user_type,user_status)
+VALUES (52,'admin', 's', 'admin@gmail.com', '1234567890', 'password', '1L','ADMIN');
 
-alter user set user_status ='ADMIN' WHERE user_id = 1;
+-- If someone registered By Default Staus will be UU, Need to change the user_status to Admin
+UPDATE user SET user_status='ADMIN' WHERE id=1;
 
  insert into user_roles values (1,'ADMIN');
  insert into user_roles values (2,'EXHIBITOR');

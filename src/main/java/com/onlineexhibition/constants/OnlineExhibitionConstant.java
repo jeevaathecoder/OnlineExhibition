@@ -2,8 +2,6 @@ package com.onlineexhibition.constants;
 
 public interface OnlineExhibitionConstant {
 
-
-
         String UNAUTHORIZED_USER= "UU";
         String AUTHORIZED_USER= "AU";
         String ADMIN="ADMIN";

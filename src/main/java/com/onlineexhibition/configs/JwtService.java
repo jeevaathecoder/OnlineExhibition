@@ -42,6 +42,7 @@ public class JwtService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         extraClaims.put("userId", user.getId());
+        extraClaims.put("user_type_id", user.getUser_type_id());
         return Jwts
                 .builder()
                 .setClaims(extraClaims)

@@ -19,10 +19,12 @@ public class StallController{
     private StallService stallService;
 
     @PostMapping(value = "/add")
-    public ResponseEntity<StallResponse> saveStall(@Valid @RequestBody Stall stall) {
+    public ResponseEntity<String> saveStall(@Valid @RequestBody Stall stall) {
         StallResponse response =stallService.saveStall(stall);
-        return new ResponseEntity<StallResponse>(response, HttpStatus.ACCEPTED);
+        return  ResponseEntity.ok("Stall Added Sucessfully");
     }
+
+
     @GetMapping(value = "/all")
     public List<Stall> fetchStallList() {
 
