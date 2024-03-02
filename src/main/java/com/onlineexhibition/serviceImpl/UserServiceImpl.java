@@ -91,6 +91,7 @@ public class UserServiceImpl implements IUserService {
         return onlineExhibitionConstant.ADMIN_DOESNT_EXISTED;
     }
 
+
     @Override
     public User findByUserId(Long id) {
         return userRepository.findById(id).get();
@@ -129,7 +130,7 @@ public class UserServiceImpl implements IUserService {
             user.setMobile(request.getMobile());
             user.setUser_type_id(request.getUser_type_id());
             user.setPassword(passwordEncoder.encode(request.getPassword()));
-            user.setStatus(onlineExhibitionConstant.UNAUTHORIZED_USER);
+            user.setStatus(onlineExhibitionConstant.ADMIN);
             User create_user = userRepository.save(user);
 
             return create_user;

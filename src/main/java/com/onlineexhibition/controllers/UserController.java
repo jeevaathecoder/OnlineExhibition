@@ -34,7 +34,7 @@ public class UserController {
 
 
     @PostMapping("/createuser")
-    public ResponseEntity<?> creatUser(@Valid @RequestBody SignupRequest request){
+    public ResponseEntity<?> createUser(@Valid @RequestBody SignupRequest request){
         User user	= userService.createUser(request);
         if(user==null) {
             return ResponseEntity.badRequest().body("emailId is already existed or User already existed");

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -35,24 +36,20 @@ public class StallServiceImpl implements StallService {
 
     @Override
     public StallResponse saveStall(@Valid Stall stall) {
-        UserRole roleExists =null;
+        UserRole roleExists = null;
         Stall isStallExisted = stallRepository.findByRoleId(stall.getUser().getId());
         User user = userService.findByUserId(stall.getUser().getId());
-        if(user!=null) {
+        if (user != null) {
             roleExists = userRoleServcie.findRoleById(user.getUser_type_id());
-            if(roleExists==null) {
+            if (roleExists == null) {
                 return StallResponse.builder().responseMessage("ROLE DOESN'T EXISTS").build();
-            }
-            else if(roleExists!=null&&roleExists.getUser_role().equals(onlineExhibitionConstant.USER)) {
+            } else if (roleExists != null && roleExists.getUser_role().equals(onlineExhibitionConstant.USER)) {
                 return StallResponse.builder().responseMessage("INVALID IS EXHIBITOIR ID").build();
-            }
-            else if(roleExists!=null&&user.getStatus().equals(onlineExhibitionConstant.UNAUTHORIZED_USER)) {
+            } else if (roleExists != null && user.getStatus().equals(onlineExhibitionConstant.UNAUTHORIZED_USER)) {
                 return StallResponse.builder().responseMessage("PLEASE GET APPRVOAL FROM ADMIN TO CREATE STALL").build();
-            }
-            else if(isStallExisted!=null) {
+            } else if (isStallExisted != null) {
                 return StallResponse.builder().responseMessage("EXHIBITOR HAS STALL ALREADY").build();
-            }
-            else {
+            } else {
                 Stall save = stallRepository.save(stall);
                 return StallResponse.builder().responseMessage("SUCCESSFULLY STALL CREATED").stall(stall).build();
             }
@@ -76,8 +73,26 @@ public class StallServiceImpl implements StallService {
     }
 
     @Override
-    public Stall updateStall(Long stallId, Stall stall) {
-        return null;
-    }
+    public StallResponse updateStall(Long stallId, Stall updatedStall) {
+                Optional<Stall> optionalStall = stallRepository.findById(stallId);
 
-}
+                if (optionalStall.isPresent()) {
+                    Stall existingStall = optionalStall.get();
+
+                    existingStall.setStallName(updatedStall.getStallName());
+                    existingStall.setStallDescription(updatedStall.getStallDescription());
+                    existingStall.setPhotoUrl(updatedStall.getPhotoUrl());
+                    existingStall.setVideoUrl(updatedStall.getVideoUrl());
+                    existingStall.setBrochureUrl(updatedStall.getBrochureUrl());
+                    existingStall.setUser(updatedStall.getUser());
+
+                    stallRepository.save(existingStall);
+
+                    return new StallResponse("Stall updated successfully", true);
+                } else {
+                    return new StallResponse("Stall not found", false);
+                }
+            }
+        }
+
+

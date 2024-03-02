@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/stall")
 public class StallController{
@@ -40,9 +40,10 @@ public class StallController{
         return "Stall Deleted Sucessfully";
     }
 
-    @PutMapping("/{id}")
-    public Stall updateStall(@PathVariable("id") Long stallId, @RequestBody Stall stall){
-        return stallService.updateStall(stallId,stall);
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<StallResponse> updateStall(@PathVariable("id") Long stallId, @Valid @RequestBody Stall stall) {
+        StallResponse response =stallService.updateStall(stallId, stall);
+        return new ResponseEntity<StallResponse>(response, HttpStatus.ACCEPTED);
     }
 }
 
