@@ -93,6 +93,14 @@ public class StallServiceImpl implements StallService {
                     return new StallResponse("Stall not found", false);
                 }
             }
-        }
+
+    @Override
+    public Stall findByRoleId(Long userId) {
+        System.out.println("userId"+userId);
+        return stallRepository.findByRoleId(userId);
+
+    }
+
+}
 
 

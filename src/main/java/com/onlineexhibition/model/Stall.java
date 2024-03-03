@@ -36,7 +36,6 @@ public class Stall {
 
     @OneToOne
     @JoinColumn(name = "user_id")
-    @NotBlank
     private User user;
 
 }

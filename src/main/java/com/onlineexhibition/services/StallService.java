@@ -18,4 +18,6 @@ public interface StallService{
     StallResponse updateStall(Long stallId, Stall stall);
 
 
+    Stall findByRoleId(Long userId);
+
 }

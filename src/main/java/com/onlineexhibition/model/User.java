@@ -1,5 +1,6 @@
 package com.onlineexhibition.model;
 
+import com.onlineexhibition.repository.UserRepository;
 import jakarta.persistence.*;
 import java.util.*;
 
@@ -32,8 +33,10 @@ public class User implements UserDetails {
 
     @Column(name="user_status")
     private String status;
+
     @Column(name="user_type")
     private Long user_type_id;
+
 
 
     @Override

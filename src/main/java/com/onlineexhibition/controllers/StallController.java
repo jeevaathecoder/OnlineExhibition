@@ -19,17 +19,29 @@ public class StallController{
     private StallService stallService;
 
     @PostMapping(value = "/add")
-    public ResponseEntity<String> saveStall(@Valid @RequestBody Stall stall) {
+    public ResponseEntity<StallResponse> saveStall(@Valid @RequestBody Stall stall) {
         StallResponse response =stallService.saveStall(stall);
-        return  ResponseEntity.ok("Stall Added Sucessfully");
+        return new ResponseEntity<StallResponse>(response, HttpStatus.ACCEPTED);
+
     }
-
-
     @GetMapping(value = "/all")
     public List<Stall> fetchStallList() {
 
         return stallService.fetchStallList();
     }
+
+    @GetMapping(value = "/user/{id}")
+    public Stall findByRoleId(@PathVariable("id") Long userId) {
+        System.out.println("userId: " + userId);
+        return stallService.findByRoleId(userId);
+}
+
+
+
+//    @GetMapping(value = "/user/{id}")
+//    public Stall findStallByUserId(@PathVariable("id") Long userId) {
+//        return stallService.findStallByUserId(userId);
+//    }
 
     @GetMapping(value = "/{id}")
     public Stall fetchStallById(@PathVariable("id") Long stallId) {

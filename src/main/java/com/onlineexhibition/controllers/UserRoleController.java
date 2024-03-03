@@ -17,7 +17,6 @@ public class UserRoleController {
     @Autowired
     private UserRoleService useroleService;
 
-
     @PostMapping("/role")
     public ResponseEntity<UserRole> createRole(@NotNull String role) {
         UserRole user = useroleService.createRole(role);

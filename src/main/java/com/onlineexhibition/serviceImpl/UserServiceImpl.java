@@ -118,6 +118,7 @@ public class UserServiceImpl implements IUserService {
         System.out.println(loginRequest);
         var userToLog = userRepository.findByEmail(loginRequest.getEmail()).orElseThrow();
         return ResponseEntity.ok(AuthenticationResponse.builder()
+
                 .token(jwtService.generateToken(userToLog))
                 .refreshToken(null)
                 .build());
