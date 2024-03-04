@@ -12,5 +12,5 @@ Note: 1.We need to restrict the exhibitor by ensuring that one exhibitor can abl
 ---------------------------
 
 Chat Feature Also Need to Inclue in this project,
-If user Have any Queries Regarding chat, they can chat with the respective Exhibitor for that particular Stall (1 to 1 Chat)
+If user Have any Queries Regarding the Stall, they can chat with the respective Exhibitor for that particular Stall (1 to 1 Chat)
 But at the same time One exhibitor need to handle the multiple chat from the user and seperetely
